@@ -50,12 +50,12 @@
             50% { background-position: 100% 50%; }
         }
 
-        /* Split Layout */
-        .dashboard {
+        /* Main Layout */
+        .main-content {
             display: grid;
             grid-template-columns: 1.2fr 0.8fr;
             gap: 32px;
-            margin-top: 20px;
+            margin-bottom: 32px;
         }
 
         /* Form Card */
@@ -175,228 +175,226 @@
             transform: translateX(100%);
         }
 
-        /* Student List Side */
-        .list-card {
+        /* Filter Card */
+        .filter-card {
             background: white;
             border-radius: 28px;
             padding: 32px;
             box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
             border: 1px solid #f1f5f9;
-            max-height: 700px;
-            overflow-y: auto;
         }
 
-        .list-card h2 {
+        .filter-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .filter-header h2 {
             font-size: 1.5rem;
             font-weight: 700;
             color: #0f172a;
-            margin-bottom: 24px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .list-card h2::before {
-            content: "📋";
+        .filter-header h2::before {
+            content: "🔍";
             font-size: 1.8rem;
         }
 
-        /* Modern Student Items */
-        .student-grid {
+        .filter-input-group {
             display: flex;
-            flex-direction: column;
             gap: 12px;
         }
 
-        .student-item {
-            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-            border: 2px solid transparent;
-            border-radius: 20px;
-            padding: 20px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
+        .filter-input {
+            flex: 1;
+            padding: 14px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 18px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f8fafc;
         }
 
-        .student-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .student-item:hover {
-            transform: translateX(8px) scale(1.02);
+        .filter-input:focus {
+            outline: none;
             border-color: #3b82f6;
-            box-shadow: 0 15px 30px -10px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
         }
 
-        .student-item:hover::before {
-            opacity: 1;
-        }
-
-        .student-name {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #0f172a;
-            margin-bottom: 6px;
-        }
-
-        .student-meta {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 0.9rem;
-            flex-wrap: wrap;
-        }
-
-        .sap-badge {
-            background: #3b82f6;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 40px;
-            font-weight: 600;
-            font-size: 0.8rem;
-        }
-
-        .marks-badge {
-            background: #10b981;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 40px;
-            font-weight: 600;
-            font-size: 0.8rem;
-        }
-
-        .gender-indicator {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            display: inline-block;
-        }
-
-        .gender-male { background: #3b82f6; }
-        .gender-female { background: #ec4899; }
-        .gender-other { background: #8b5cf6; }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(8px);
-            animation: fadeIn 0.3s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .modal-content {
-            background: white;
-            margin: 5% auto;
-            padding: 40px;
-            border-radius: 40px;
-            width: 90%;
-            max-width: 500px;
-            position: relative;
-            animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 50px 70px -20px rgba(0, 0, 0, 0.3);
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .modal-close {
-            position: absolute;
-            right: 24px;
-            top: 24px;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #f1f5f9;
-            border: none;
-            color: #64748b;
-            font-size: 24px;
+        .filter-select {
+            min-width: 200px;
+            padding: 14px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 18px;
+            font-size: 1rem;
+            background: #f8fafc;
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+
+        .filter-select option {
+            padding: 12px;
+        }
+
+        /* Student Info Display */
+        .student-info-card {
+            background: linear-gradient(135deg, #f8fafc, #ffffff);
+            border-radius: 24px;
+            padding: 30px;
+            margin-top: 20px;
+            border: 2px solid #e2e8f0;
+            min-height: 200px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s;
         }
 
-        .modal-close:hover {
-            background: #ef4444;
-            color: white;
-            transform: rotate(90deg);
+        .selected-student-info {
+            width: 100%;
         }
 
-        /* Detail Cards in Modal */
-        .detail-card {
-            background: linear-gradient(135deg, #f8fafc, #ffffff);
-            border-radius: 24px;
-            padding: 20px;
+        .info-placeholder {
+            text-align: center;
+            color: #94a3b8;
+        }
+
+        .info-placeholder-icon {
+            font-size: 4rem;
             margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        .info-placeholder h3 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            color: #64748b;
+        }
+
+        /* Student Details Grid */
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .detail-item-modern {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
             border: 1px solid #e2e8f0;
             transition: transform 0.3s;
         }
 
-        .detail-card:hover {
-            transform: scale(1.02);
+        .detail-item-modern:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px -10px rgba(59, 130, 246, 0.2);
         }
 
-        .detail-label {
+        .detail-icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        .detail-label-modern {
             font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
             color: #64748b;
             font-weight: 600;
             margin-bottom: 8px;
             display: block;
         }
 
-        .detail-value {
-            font-size: 1.2rem;
+        .detail-value-modern {
+            font-size: 1.4rem;
             font-weight: 700;
             color: #0f172a;
         }
 
-        /* Marks Progress Bar */
-        .progress-bar {
+        .progress-bar-modern {
             width: 100%;
-            height: 10px;
+            height: 12px;
             background: #e2e8f0;
-            border-radius: 10px;
-            margin-top: 10px;
+            border-radius: 20px;
+            margin-top: 12px;
             overflow: hidden;
         }
 
-        .progress-fill {
+        .progress-fill-modern {
             height: 100%;
             background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-            border-radius: 10px;
+            border-radius: 20px;
             transition: width 0.3s ease;
         }
+
+        /* Bottom Stats Section */
+        .bottom-stats {
+            margin-top: 32px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 24px;
+            padding: 24px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -15px rgba(59, 130, 246, 0.3);
+            border-color: #3b82f6;
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: #64748b;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Gender Badge */
+        .gender-badge-large {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .bg-male { background: #dbeafe; color: #1e40af; }
+        .bg-female { background: #fce7f3; color: #9d174d; }
+        .bg-other { background: #ede9fe; color: #5b21b6; }
 
         /* Alert System */
         .alert {
@@ -441,41 +439,17 @@
             font-size: 1.5rem;
         }
 
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 40px 20px;
-            color: #94a3b8;
-        }
-
-        .empty-state-icon {
-            font-size: 4rem;
-            margin-bottom: 16px;
-            opacity: 0.5;
-        }
-
-        /* Scrollbar Styling */
-        .list-card::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .list-card::-webkit-scrollbar-track {
-            background: #f1f5f9;
-            border-radius: 10px;
-        }
-
-        .list-card::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 10px;
-        }
-
-        .list-card::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
-            .dashboard {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .bottom-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .details-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -486,10 +460,13 @@
             h1 {
                 font-size: 2rem;
             }
-            
-            .modal-content {
-                margin: 20% auto;
-                padding: 30px;
+
+            .filter-input-group {
+                flex-direction: column;
+            }
+
+            .filter-select {
+                min-width: 100%;
             }
         }
     </style>
@@ -498,7 +475,7 @@
     <div class="container">
         <h1>StudentFlow</h1>
         
-        <div class="dashboard">
+        <div class="main-content">
             <!-- Left Side - Form -->
             <div class="form-card">
                 <h2>Add New Student</h2>
@@ -570,41 +547,56 @@
                 </form>
             </div>
             
-            <!-- Right Side - Student List (FIXED SYNTAX ERROR) -->
-            <div class="list-card">
-                <h2>Student Directory</h2>
-                <div id="studentList" class="student-grid">
-                    {% if students %}
+            <!-- Right Side - Filter and Student Info -->
+            <div class="filter-card">
+                <div class="filter-header">
+                    <h2>Student Lookup</h2>
+                </div>
+                
+                <div class="filter-input-group">
+                    <input type="text" id="searchInput" class="filter-input" 
+                           placeholder="Type to search students..." 
+                           onkeyup="filterStudents()">
+                    <select id="studentSelect" class="filter-select" onchange="showSelectedStudent()">
+                        <option value="">Select a student</option>
                         {% for student in students %}
-                        <!-- FIXED: Removed extra curly braces -->
-                        <div class="student-item" onclick="showStudentDetails({{ student.id }})">
-                            <div class="student-name">{{ student.student_name }}</div>
-                            <div class="student-meta">
-                                <span class="gender-indicator gender-{{ student.gender|lower }}"></span>
-                                <span class="sap-badge">SAP: {{ student.sap_id }}</span>
-                                <span class="marks-badge">Marks: {{ student.marks }}</span>
-                            </div>
-                        </div>
+                        <option value="{{ student.id }}">{{ student.student_name }} (SAP: {{ student.sap_id }})</option>
                         {% endfor %}
-                    {% else %}
-                        <div class="empty-state">
-                            <div class="empty-state-icon">📭</div>
-                            <h3>No Students Yet</h3>
-                            <p>Add your first student using the form</p>
-                        </div>
-                    {% endif %}
+                    </select>
+                </div>
+                
+                <!-- Selected Student Information Display -->
+                <div id="studentInfoDisplay" class="student-info-card">
+                    <div class="info-placeholder">
+                        <div class="info-placeholder-icon">👨‍🎓</div>
+                        <h3>Select a student</h3>
+                        <p>Choose from the dropdown above to view details</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <!-- Modal -->
-    <div id="studentModal" class="modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">×</button>
-            <h2 style="font-size: 2rem; margin-bottom: 24px; color: #0f172a;">Student Profile</h2>
-            <div id="studentDetails" class="student-detail">
-                <!-- Details loaded dynamically -->
+        
+        <!-- Bottom Generic Stats Section -->
+        <div class="bottom-stats" id="statsSection">
+            <div class="stat-card">
+                <div class="stat-icon">📚</div>
+                <div class="stat-label">Total Students</div>
+                <div class="stat-value" id="totalStudents">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-label">Average Marks</div>
+                <div class="stat-value" id="avgMarks">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🏆</div>
+                <div class="stat-label">Highest Marks</div>
+                <div class="stat-value" id="maxMarks">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📉</div>
+                <div class="stat-label">Lowest Marks</div>
+                <div class="stat-value" id="minMarks">0</div>
             </div>
         </div>
     </div>
@@ -613,6 +605,105 @@
     <div id="alert" class="alert"></div>
 
     <script>
+        // Store students data globally
+        let studentsData = {{ students|tojson }};
+        
+        // Load stats on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateStats();
+        });
+
+        // Filter students based on search input
+        function filterStudents() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const select = document.getElementById('studentSelect');
+            
+            // Filter options
+            for (let option of select.options) {
+                if (option.value === '') continue; // Skip the first option
+                const text = option.text.toLowerCase();
+                option.style.display = text.includes(searchTerm) ? 'block' : 'none';
+            }
+        }
+
+        // Show selected student details
+        async function showSelectedStudent() {
+            const studentId = document.getElementById('studentSelect').value;
+            
+            if (!studentId) {
+                document.getElementById('studentInfoDisplay').innerHTML = `
+                    <div class="info-placeholder">
+                        <div class="info-placeholder-icon">👨‍🎓</div>
+                        <h3>Select a student</h3>
+                        <p>Choose from the dropdown above to view details</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            try {
+                const response = await fetch(`/get_student/${studentId}`);
+                const student = await response.json();
+                
+                if (response.ok) {
+                    displayStudentInfo(student);
+                } else {
+                    showAlert('❌ Error loading student details', 'error');
+                }
+            } catch (error) {
+                showAlert('❌ Network error', 'error');
+            }
+        }
+
+        // Display student information in the card
+        function displayStudentInfo(student) {
+            const genderClass = student.gender.toLowerCase() === 'male' ? 'bg-male' : 
+                               student.gender.toLowerCase() === 'female' ? 'bg-female' : 'bg-other';
+            
+            const marksPercentage = (student.marks / 100) * 100;
+            
+            document.getElementById('studentInfoDisplay').innerHTML = `
+                <div class="selected-student-info">
+                    <h2 style="font-size: 2rem; margin-bottom: 20px; color: #0f172a;">${escapeHtml(student.student_name)}</h2>
+                    
+                    <div class="details-grid">
+                        <div class="detail-item-modern">
+                            <div class="detail-icon">🆔</div>
+                            <span class="detail-label-modern">SAP ID</span>
+                            <div class="detail-value-modern">${escapeHtml(student.sap_id)}</div>
+                        </div>
+                        
+                        <div class="detail-item-modern">
+                            <div class="detail-icon">⚥</div>
+                            <span class="detail-label-modern">Gender</span>
+                            <div class="detail-value-modern">
+                                <span class="gender-badge-large ${genderClass}">${escapeHtml(student.gender)}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item-modern">
+                            <div class="detail-icon">📧</div>
+                            <span class="detail-label-modern">Email</span>
+                            <div class="detail-value-modern" style="font-size: 1rem;">${escapeHtml(student.gmail)}</div>
+                        </div>
+                        
+                        <div class="detail-item-modern">
+                            <div class="detail-icon">📊</div>
+                            <span class="detail-label-modern">Marks</span>
+                            <div class="detail-value-modern">${escapeHtml(student.marks)} / 100</div>
+                            <div class="progress-bar-modern">
+                                <div class="progress-fill-modern" style="width: ${marksPercentage}%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 20px; text-align: right; color: #64748b;">
+                        Registered: ${escapeHtml(new Date(student.created_at).toLocaleDateString())}
+                    </div>
+                </div>
+            `;
+        }
+
         // Form submission handler
         document.getElementById('studentForm').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -661,47 +752,16 @@
                     showAlert('✅ Student added successfully!', 'success');
                     this.reset();
                     
-                    // Update student list
-                    const studentList = document.getElementById('studentList');
+                    // Add new option to select dropdown
+                    const select = document.getElementById('studentSelect');
+                    const option = document.createElement('option');
+                    option.value = data.student.id;
+                    option.text = `${data.student.student_name} (SAP: ${data.student.sap_id})`;
+                    select.appendChild(option);
                     
-                    // Remove empty state if present
-                    if (studentList.querySelector('.empty-state')) {
-                        studentList.innerHTML = '';
-                    }
+                    // Update stats
+                    updateStats();
                     
-                    const genderClass = data.student.gender.toLowerCase();
-                    
-                    // FIXED: Properly escape and create new student element
-                    const newStudent = document.createElement('div');
-                    newStudent.className = 'student-item';
-                    newStudent.setAttribute('onclick', `showStudentDetails(${data.student.id})`);
-                    
-                    const nameDiv = document.createElement('div');
-                    nameDiv.className = 'student-name';
-                    nameDiv.textContent = data.student.student_name;
-                    
-                    const metaDiv = document.createElement('div');
-                    metaDiv.className = 'student-meta';
-                    
-                    const genderSpan = document.createElement('span');
-                    genderSpan.className = `gender-indicator gender-${genderClass}`;
-                    
-                    const sapSpan = document.createElement('span');
-                    sapSpan.className = 'sap-badge';
-                    sapSpan.textContent = `SAP: ${data.student.sap_id}`;
-                    
-                    const marksSpan = document.createElement('span');
-                    marksSpan.className = 'marks-badge';
-                    marksSpan.textContent = `Marks: ${data.student.marks}`;
-                    
-                    metaDiv.appendChild(genderSpan);
-                    metaDiv.appendChild(sapSpan);
-                    metaDiv.appendChild(marksSpan);
-                    
-                    newStudent.appendChild(nameDiv);
-                    newStudent.appendChild(metaDiv);
-                    
-                    studentList.appendChild(newStudent);
                 } else {
                     showAlert(`❌ ${data.error || 'Error adding student'}`, 'error');
                 }
@@ -714,96 +774,23 @@
                 submitBtn.disabled = false;
             }
         });
-        
-        // Show student details
-        async function showStudentDetails(studentId) {
+
+        // Update bottom stats
+        async function updateStats() {
             try {
-                const response = await fetch(`/get_student/${studentId}`, {
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest'
-                    }
-                });
+                const response = await fetch('/student_stats');
+                const stats = await response.json();
                 
-                if (!response.ok) {
-                    throw new Error('Failed to fetch student details');
+                if (response.ok) {
+                    document.getElementById('totalStudents').textContent = stats.total_students;
+                    document.getElementById('avgMarks').textContent = stats.avg_marks;
+                    document.getElementById('maxMarks').textContent = stats.max_marks;
+                    document.getElementById('minMarks').textContent = stats.min_marks;
                 }
-                
-                const student = await response.json();
-                
-                const genderClass = student.gender.toLowerCase();
-                const formattedDate = new Date(student.created_at).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                });
-                
-                // Calculate percentage for progress bar
-                const marksPercentage = (student.marks / 100) * 100;
-                
-                document.getElementById('studentDetails').innerHTML = `
-                    <div class="detail-card">
-                        <span class="detail-label">Full Name</span>
-                        <span class="detail-value">${escapeHtml(student.student_name)}</span>
-                    </div>
-                    <div class="detail-card">
-                        <span class="detail-label">Gender</span>
-                        <span class="detail-value">
-                            <span class="gender-indicator gender-${genderClass}" style="margin-right: 8px;"></span>
-                            ${escapeHtml(student.gender)}
-                        </span>
-                    </div>
-                    <div class="detail-card">
-                        <span class="detail-label">SAP ID</span>
-                        <span class="detail-value">${escapeHtml(student.sap_id)}</span>
-                    </div>
-                    <div class="detail-card">
-                        <span class="detail-label">Email</span>
-                        <span class="detail-value">${escapeHtml(student.gmail)}</span>
-                    </div>
-                    <div class="detail-card">
-                        <span class="detail-label">Marks</span>
-                        <span class="detail-value">${escapeHtml(student.marks)} / 100</span>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: ${marksPercentage}%;"></div>
-                        </div>
-                    </div>
-                    <div class="detail-card">
-                        <span class="detail-label">Registered On</span>
-                        <span class="detail-value">${escapeHtml(formattedDate)}</span>
-                    </div>
-                `;
-                
-                document.getElementById('studentModal').style.display = 'block';
-                document.body.style.overflow = 'hidden'; // Prevent background scrolling
-                
             } catch (error) {
-                showAlert('❌ Error loading student details', 'error');
-                console.error('Error:', error);
+                console.error('Error updating stats:', error);
             }
         }
-        
-        // Close modal
-        function closeModal() {
-            document.getElementById('studentModal').style.display = 'none';
-            document.body.style.overflow = 'auto'; // Restore scrolling
-        }
-        
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('studentModal');
-            if (event.target === modal) {
-                closeModal();
-            }
-        }
-        
-        // Handle escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeModal();
-            }
-        });
         
         // Show alert message
         function showAlert(message, type) {
@@ -815,7 +802,6 @@
             `;
             alert.style.display = 'flex';
             
-            // Auto hide after 3 seconds
             setTimeout(() => {
                 alert.style.display = 'none';
             }, 3000);
@@ -831,18 +817,6 @@
                 .replace(/"/g, "&quot;")
                 .replace(/'/g, "&#039;");
         }
-        
-        // Input validation for SAP ID
-        document.getElementById('sap_id').addEventListener('input', function(e) {
-            this.value = this.value.replace(/[^0-9]/g, '');
-        });
-
-        // Marks validation
-        document.getElementById('marks').addEventListener('input', function(e) {
-            let value = parseFloat(this.value);
-            if (value > 100) this.value = 100;
-            if (value < 0) this.value = 0;
-        });
     </script>
 </body>
 </html>

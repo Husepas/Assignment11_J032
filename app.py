@@ -22,7 +22,7 @@ class Student(db.Model):
     gender = db.Column(db.String(10), nullable=False)
     sap_id = db.Column(db.String(11), unique=True, nullable=False)
     gmail = db.Column(db.String(100), unique=True, nullable=False)
-    marks = db.Column(db.Float, nullable=False)  # New marks field
+    marks = db.Column(db.Float, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     def to_dict(self):
@@ -52,7 +52,7 @@ def add_student():
         gender = request.form['gender']
         sap_id = request.form['sap_id']
         gmail = request.form['gmail']
-        marks = float(request.form['marks'])  # Get marks from form
+        marks = float(request.form['marks'])
         
         # Validation
         if len(sap_id) != 11 or not sap_id.isdigit():
@@ -69,7 +69,7 @@ def add_student():
             gender=gender,
             sap_id=sap_id,
             gmail=gmail,
-            marks=marks  # Add marks to new student
+            marks=marks
         )
         
         db.session.add(new_student)
@@ -87,6 +87,41 @@ def add_student():
 def get_student(student_id):
     student = Student.query.get_or_404(student_id)
     return jsonify(student.to_dict())
+
+@app.route('/filter_students', methods=['POST'])
+def filter_students():
+    try:
+        search_term = request.json.get('search_term', '').lower()
+        
+        if search_term:
+            filtered_students = Student.query.filter(
+                Student.student_name.ilike(f'%{search_term}%')
+            ).order_by(Student.student_name).all()
+        else:
+            filtered_students = Student.query.order_by(Student.student_name).all()
+        
+        return jsonify([student.to_dict() for student in filtered_students])
+    
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+
+@app.route('/student_stats')
+def student_stats():
+    try:
+        total_students = Student.query.count()
+        avg_marks = db.session.query(db.func.avg(Student.marks)).scalar() or 0
+        max_marks = db.session.query(db.func.max(Student.marks)).scalar() or 0
+        min_marks = db.session.query(db.func.min(Student.marks)).scalar() or 0
+        
+        return jsonify({
+            'total_students': total_students,
+            'avg_marks': round(avg_marks, 2),
+            'max_marks': max_marks,
+            'min_marks': min_marks
+        })
+    
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
