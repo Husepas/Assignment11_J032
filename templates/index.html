@@ -3,102 +3,81 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Student Registry</title>
+<title>Student Dashboard</title>
 
 <style>
 
 body{
-    font-family: Arial, Helvetica, sans-serif;
-    background:#eef2f7;
     margin:0;
-    padding:40px;
+    font-family: "Segoe UI", sans-serif;
+    background:#0f172a;
+    color:white;
 }
 
-.wrapper{
-    max-width:1100px;
-    margin:auto;
-}
-
-h1{
+.header{
+    background:linear-gradient(90deg,#6366f1,#22c55e);
+    padding:18px;
     text-align:center;
-    margin-bottom:30px;
-    color:#2c3e50;
+    font-size:22px;
+    font-weight:bold;
 }
 
-.grid{
+.container{
     display:grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:300px 1fr 300px;
     gap:25px;
-}
-
-.card{
-    background:white;
     padding:25px;
-    border-radius:10px;
-    box-shadow:0 4px 12px rgba(0,0,0,0.08);
 }
 
-.card h2{
-    margin-bottom:15px;
-    color:#34495e;
+.panel{
+    background:#1e293b;
+    padding:20px;
+    border-radius:12px;
 }
 
-input, select{
+input,select{
     width:100%;
     padding:10px;
     margin-top:6px;
-    margin-bottom:14px;
-    border:1px solid #ccc;
+    margin-bottom:12px;
+    border:none;
     border-radius:6px;
 }
 
 button{
-    background:#3498db;
-    border:none;
-    color:white;
-    padding:12px;
     width:100%;
+    padding:12px;
+    border:none;
+    background:#22c55e;
+    color:white;
+    font-weight:bold;
     border-radius:6px;
-    font-size:16px;
     cursor:pointer;
 }
 
 button:hover{
-    background:#2980b9;
+    background:#16a34a;
 }
 
-.student-info{
+.student-card{
+    background:#020617;
+    border-radius:10px;
+    padding:25px;
+    text-align:center;
     margin-top:20px;
-    padding:20px;
-    border:1px dashed #ccc;
-    border-radius:8px;
-    min-height:120px;
-}
-
-.stats{
-    margin-top:30px;
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
 }
 
 .stat{
-    background:white;
+    background:#020617;
     padding:20px;
     border-radius:10px;
     text-align:center;
-    box-shadow:0 4px 10px rgba(0,0,0,0.08);
+    margin-bottom:15px;
 }
 
-.stat h3{
+.stat h2{
     margin:0;
-    font-size:28px;
-    color:#2c3e50;
-}
-
-.stat p{
-    margin:5px 0 0;
-    color:#7f8c8d;
+    color:#22c55e;
 }
 
 </style>
@@ -106,14 +85,15 @@ button:hover{
 
 <body>
 
-<div class="wrapper">
+<div class="header">
+Student Performance Dashboard
+</div>
 
-<h1>Student Registry System</h1>
+<div class="container">
 
-<div class="grid">
+<div class="panel">
 
-<div class="card">
-<h2>Add Student</h2>
+<h3>Add Student</h3>
 
 <form id="studentForm">
 
@@ -140,16 +120,16 @@ button:hover{
 <button type="submit">Add Student</button>
 
 </form>
+
 </div>
 
+<div class="panel">
 
-<div class="card">
+<h3>Student Viewer</h3>
 
-<h2>Search Student</h2>
+<input type="text" id="searchInput" placeholder="Search student..." onkeyup="filterStudents()">
 
-<input type="text" id="searchInput" placeholder="Search name..." onkeyup="filterStudents()">
-
-<select id="studentSelect" onchange="showSelectedStudent()">
+<select id="studentSelect" onchange="showStudent()">
 <option value="">Select student</option>
 
 {% for student in students %}
@@ -158,34 +138,33 @@ button:hover{
 
 </select>
 
-<div class="student-info" id="studentInfo">
+<div id="studentDisplay" class="student-card">
 Select a student to view details
 </div>
 
 </div>
 
-</div>
+<div class="panel">
 
-
-<div class="stats">
+<h3>Statistics</h3>
 
 <div class="stat">
-<h3 id="totalStudents">0</h3>
+<h2 id="totalStudents">0</h2>
 <p>Total Students</p>
 </div>
 
 <div class="stat">
-<h3 id="avgMarks">0</h3>
+<h2 id="avgMarks">0</h2>
 <p>Average Marks</p>
 </div>
 
 <div class="stat">
-<h3 id="maxMarks">0</h3>
+<h2 id="maxMarks">0</h2>
 <p>Highest Marks</p>
 </div>
 
 <div class="stat">
-<h3 id="minMarks">0</h3>
+<h2 id="minMarks">0</h2>
 <p>Lowest Marks</p>
 </div>
 
@@ -213,7 +192,7 @@ alert(data.error)
 
 })
 
-async function showSelectedStudent(){
+async function showStudent(){
 
 const id=document.getElementById("studentSelect").value
 
@@ -222,13 +201,12 @@ if(!id)return
 const res=await fetch(`/get_student/${id}`)
 const student=await res.json()
 
-document.getElementById("studentInfo").innerHTML=
-`
-<b>Name:</b> ${student.student_name}<br>
-<b>SAP:</b> ${student.sap_id}<br>
-<b>Email:</b> ${student.gmail}<br>
-<b>Gender:</b> ${student.gender}<br>
-<b>Marks:</b> ${student.marks}
+document.getElementById("studentDisplay").innerHTML=`
+<h2>${student.student_name}</h2>
+<p>SAP: ${student.sap_id}</p>
+<p>Email: ${student.gmail}</p>
+<p>Gender: ${student.gender}</p>
+<p>Marks: ${student.marks}</p>
 `
 
 }
